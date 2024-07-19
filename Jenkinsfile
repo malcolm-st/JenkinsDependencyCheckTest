@@ -13,7 +13,8 @@ pipeline {
                     -o './'
                     -s './'
                     -f 'ALL' 
-                    --prettyPrint''', odcInstallation: 'OWASP Dependency-Check Vulnerabilities'
+                    --prettyPrint 
+					--suppression suppression.xml''', odcInstallation: 'OWASP Dependency-Check Vulnerabilities'
 			}
 		}
 	}	
