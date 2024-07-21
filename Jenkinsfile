@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    environment {
-        NVD_API_KEY = credentials('nvd_api_key')
-    }
     stages {
         stage('Checkout SCM') {
             steps {
@@ -13,9 +10,14 @@ pipeline {
             }
         }
         stage('OWASP DependencyCheck') {
-            steps {
-                dependencyCheck additionalArguments: '--format HTML --format XML --noupdate --suppression suppression.xml', odcInstallation: 'OWASP Dependency-Check Vulnerabilities', suppressionFile: '', apiUrl: 'https://services.nvd.nist.gov/rest/json/cves/1.0', apiKey: "${env.NVD_API_KEY}"
-            }
+           	steps {
+				 dependencyCheck additionalArguments: ''' 
+                    -o './'
+                    -s './'
+                    -f 'ALL' 
+                    --prettyPrint 
+					--suppression suppression.xml''', odcInstallation: 'OWASP Dependency-Check Vulnerabilities'
+			}
         }
     }   
     post {
