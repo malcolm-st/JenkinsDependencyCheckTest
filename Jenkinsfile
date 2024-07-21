@@ -14,7 +14,7 @@ pipeline {
         }
         stage('OWASP DependencyCheck') {
             steps {
-                dependencyCheck additionalArguments: '--format HTML --format XML --suppression suppression.xml', odcInstallation: 'OWASP Dependency-Check Vulnerabilities', suppressionFile: '', apiUrl: 'https://services.nvd.nist.gov/rest/json/cves/1.0', apiKey: "${env.NVD_API_KEY}"
+                dependencyCheck additionalArguments: '--format HTML --format XML --noupdate --suppression suppression.xml', odcInstallation: 'OWASP Dependency-Check Vulnerabilities', suppressionFile: '', apiUrl: 'https://services.nvd.nist.gov/rest/json/cves/1.0', apiKey: "${env.NVD_API_KEY}"
             }
         }
     }   
